@@ -5,7 +5,7 @@ import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 
 
-const VagaView = (props) => {
+const ItalianView = (props) => {
   const _id = props.match.params.id;
   const [italian, setItalian] = useState({});
   const [open, setOpen] = useState(false);
@@ -14,10 +14,10 @@ const VagaView = (props) => {
   const onCloseModal = () => setOpen(false);
 
   useEffect(() => {
-    getVagaById();
+    getItalianById();
   }, []);
 
-  const getVagaById = async () => {
+  const getItalianById = async () => {
     const response = await Api.fetchGetById(_id);
     const result = await response.json();
     setItalian(result);
@@ -56,4 +56,4 @@ const VagaView = (props) => {
   )
 }
 
-export default VagaView;
+export default ItalianView;
