@@ -7,7 +7,7 @@ import { Modal } from 'react-responsive-modal';
 
 const VagaView = (props) => {
   const _id = props.match.params.id;
-  const [vaga, setVaga] = useState({});
+  const [italian, setItalian] = useState({});
   const [open, setOpen] = useState(false);
 
   const onOpenModal = () => setOpen(true);
@@ -20,7 +20,7 @@ const VagaView = (props) => {
   const getVagaById = async () => {
     const response = await Api.fetchGetById(_id);
     const result = await response.json();
-    setVaga(result);
+    setItalian(result);
   }
 
   const handleDelete = async (evento) => {
@@ -36,12 +36,13 @@ const VagaView = (props) => {
     <div className="container flex-grow-1">
       <div className="row">
         <div className="col">
-          <h1 className="text-center mt-4">{vaga.titulo}</h1>
-          <h2 className="text-center">{vaga.descricao}</h2>
-          <h4 className="text-center">{vaga.salario}</h4>
-          <h5 className="text-center">{vaga.senioridade}</h5>
+        <font color="red"><h1 className="text-center mt-4">{italian.nome}</h1></font>
+          <h6 className="text-center"><strong><font color="red">INGREDIENTES:</font></strong> {italian.ingredientes}</h6>
+          <h6 className="text-center"><strong><font color="red">PREPARO:</font></strong> {italian.preparo}</h6>
+          <h6 className="text-center"><strong><font color="red">HISTÓRIA:</font></strong> {italian.historia}</h6>
+          <h6 className="text-center"><img src={italian.imagem}  width="25%" alt={italian.nome}/></h6>
           <div className="btn-group mt-3 w-100 d-flex align-items-center justify-content-center">
-            <Link to={`/update/${vaga._id}`}  className="btn btn-outline-info">Editar</Link>
+            <Link to={`/edit/${italian._id}`}  className="btn btn-outline-info">Editar</Link>
             <button className="btn btn-outline-danger" onClick={onOpenModal}>Excluir</button>
           </div>
         </div>

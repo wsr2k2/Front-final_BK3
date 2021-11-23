@@ -1,23 +1,23 @@
 const Api = {
-  apiUrl: 'http://localhost:3001/vagas',
-  fetchGetAll: () => fetch(Api.apiUrl),
-  fetchGetById: id => fetch(`${Api.apiUrl}/${id}`),
-  fetchPost: (vaga) => {
+  apiUrl: 'https://api-sabores-do-mundo.herokuapp.com/italian',
+  fetchGetAll: () => fetch(`${Api.apiUrl}/listAll`),
+  fetchGetById: id => fetch(`${Api.apiUrl}/listId/${id}`),
+  fetchPost: (italian) => {
     return fetch(`${Api.apiUrl}/add`, {
       method: 'POST',
       headers: new Headers({
         "Content-Type": "application/json",
       }),
-      body: JSON.stringify(vaga)
+      body: JSON.stringify(italian)
     })
   },
-  fetchPut: (vaga, id) => {
+  fetchPut: (italian, id) => {
     return fetch(`${Api.apiUrl}/update/${id}`, {
       method: 'PUT',
       headers: new Headers({
         "Content-Type": "application/json",
       }),
-      body: JSON.stringify(vaga)
+      body: JSON.stringify(italian)
     })
   },
   fetchDelete: (id) => {

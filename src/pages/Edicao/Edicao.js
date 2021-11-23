@@ -4,40 +4,38 @@ import Api from "../../api/api";
 const Edicao = (props) => {
   const _id = props.match.params.id;
   const history = props.history;
-  // criacao do estado
-  const [vaga, setVaga] = useState({});
+  // alteração do prato
+  const [italian, setItalian] = useState({});
 
   // o use effect chama a funcao getById que retorna o objeto do backend de acordo com o id
   useEffect(() => {
-    getVagaById();
+    getItalianById();
   }, []);
 
-  const getVagaById = async () => {
+  const getItalianById = async () => {
     // faz uma chamada para api para pegar o objeto de acordo com o id.
     const response = await Api.fetchGetById(_id);
     const result = await response.json();
-    // atualizo o meu estado de acordo com o resultado.
-    setVaga(result);
+    // atualiza o prato de acordo com o resultado.
+    setItalian(result);
   };
 
   const handleFieldsChange = (event) => {
-    // clono meu objeto do estado
-    const campos = { ...vaga };
+    // clono meu objeto do prato
+    const campos = { ...italian };
     // para cada input eu atualizo o seu respectivo valor no obj
     campos[event.target.name] = event.target.value;
-
-    // atualizo o meu estado com esse novo objeto.
-    setVaga(campos);
+    // atualizo o meu prato com esse novo objeto.
+    setItalian(campos);
   };
 
   const handleSubmit = async (evento) => {
     evento.preventDefault();
-    // faco uma copia do estado com obj atualizado.
-    const vagaObj = { ...vaga };
-    // transforma o salario em inteiro.
-    vagaObj.salario = parseInt(vagaObj.salario);
+    // faco uma copia do prato com obj atualizado.
+    const italianObj = { ...italian };
+    
     try {
-      const response = await Api.fetchPut(vagaObj, _id);
+      const response = await Api.fetchPut(italianObj, _id);
       const result = await response.json();
       alert(result.message);
       history.push("/"); // forca o historico a voltar para a rota de / => home
@@ -52,10 +50,11 @@ const Edicao = (props) => {
         <div className="card-title">
           <div className="row">
             <div className="col">
-              <h3>Edicao da Vagaa</h3>
+              <h3>Edicao do Prato</h3>
             </div>
           </div>
         </div>
+        
         <div className="card-body">
           <form onSubmit={handleSubmit}>
             <div className="row">
@@ -63,62 +62,80 @@ const Edicao = (props) => {
                 <div className="form-floating mb-3">
                   <input
                     type="text"
-                    value={vaga.titulo}
+                    value={italian.nome}
                     className="form-control"
-                    name="titulo"
+                    name="nome"
                     id="floatingInput"
-                    placeholder="Digite o Titulo"
+                    placeholder="Digite o nome do prato"
                     onChange={handleFieldsChange}
                   />
-                  <label htmlFor="floatingInput">Titulo</label>
+                  <label htmlFor="floatingInput">Nome do Prato</label>
                 </div>
               </div>
+              
               <div className="col">
-                <div className="form-floating">
+                <div className="form-floating">                  
                   <input
                     type="text"
-                    value={vaga.salario}
+                    value={italian.ingredientes}
                     className="form-control"
-                    name="salario"
+                    name="ingredientes"
                     id="floatingsalario"
-                    placeholder="Digite o Salario"
+                    placeholder="Digite os ingredientes"
                     onChange={handleFieldsChange}
                   />
-                  <label htmlFor="floatingsalario">Salario</label>
+                  <label htmlFor="floatingsalario">Ingredientes</label>
                 </div>
               </div>
             </div>
+            
             <div className="row">
               <div className="col">
-                <div className="form-floating mb-3">
+                <div className="form-floating mb-3">                  
                   <input
                     type="text"
-                    value={vaga.descricao}
+                    value={italian.preparo}
                     className="form-control"
-                    name="descricao"
+                    name="preparo"
                     id="floatingInput"
-                    placeholder="Digite a Descricao"
+                    placeholder="Digite o modo de preparo"
                     onChange={handleFieldsChange}
                   />
-                  <label htmlFor="floatingInput">Descricao</label>
+                  <label htmlFor="floatingInput">Modo de Preparo</label>
                 </div>
-              </div>
+              </div> 
+            </div>
+            <div className="row">
               <div className="col">
-                <div className="form-floating">
-                  <select value={vaga.senioridade}
+                <div className="form-floating mb-3">                  
+                  <input
+                    type="text"
+                    value={italian.historia}
                     className="form-control"
-                    name="senioridade"
-                    id="floatingsenioridade"
-                    value={vaga.senioridade}
+                    name="historia"
+                    id="floatingInput"
+                    placeholder="Digite o modo de preparo"
                     onChange={handleFieldsChange}
-                    >
-                    <option value="junior">Junior</option>
-                    <option value="pleno">pleno</option>
-                    <option value="senior">senior</option>
-                  </select>
-                  <label htmlFor="floatingsenioridade">Senioridade</label>
+                  />
+                  <label htmlFor="floatingInput">História do Prato</label>
                 </div>
-              </div>
+              </div> 
+            </div>
+            <div className="row">
+              <div className="col">
+                <div className="form-floating mb-3">                  
+                  <input
+                    type="text"
+                    value={italian.imagem}
+                    className="form-control"
+                    name="imagem"
+                    id="floatingInput"
+                    placeholder="Insira a URL da Imagem"
+                    onChange={handleFieldsChange}
+                  />
+                  <label htmlFor="floatingInput">Imagem</label>
+                </div>
+              </div> 
             </div>
             <div className="row">
               <div className="col">
