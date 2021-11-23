@@ -34,8 +34,7 @@ const Edicao = (props) => {
     evento.preventDefault();
     // faco uma copia do estado com obj atualizado.
     const vagaObj = { ...vaga };
-    // transforma o salario em inteiro.
-    vagaObj.salario = parseInt(vagaObj.salario);
+    
     try {
       const response = await Api.fetchPut(vagaObj, _id);
       const result = await response.json();
@@ -52,7 +51,7 @@ const Edicao = (props) => {
         <div className="card-title">
           <div className="row">
             <div className="col">
-              <h3>Edicao da Vagaa</h3>
+              <h3>Edicao de Personagem</h3>
             </div>
           </div>
         </div>
@@ -63,60 +62,28 @@ const Edicao = (props) => {
                 <div className="form-floating mb-3">
                   <input
                     type="text"
-                    value={vaga.titulo}
+                    value={vaga.nome}
                     className="form-control"
-                    name="titulo"
+                    name="nome"
                     id="floatingInput"
-                    placeholder="Digite o Titulo"
+                    placeholder="Digite o nome"
                     onChange={handleFieldsChange}
                   />
-                  <label htmlFor="floatingInput">Titulo</label>
+                  <label htmlFor="floatingInput">Nome</label>
                 </div>
               </div>
               <div className="col">
                 <div className="form-floating">
                   <input
                     type="text"
-                    value={vaga.salario}
+                    value={vaga.imagemUrl}
                     className="form-control"
-                    name="salario"
+                    name="imagemUrl"
                     id="floatingsalario"
-                    placeholder="Digite o Salario"
+                    placeholder="Digite a URL"
                     onChange={handleFieldsChange}
                   />
-                  <label htmlFor="floatingsalario">Salario</label>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col">
-                <div className="form-floating mb-3">
-                  <input
-                    type="text"
-                    value={vaga.descricao}
-                    className="form-control"
-                    name="descricao"
-                    id="floatingInput"
-                    placeholder="Digite a Descricao"
-                    onChange={handleFieldsChange}
-                  />
-                  <label htmlFor="floatingInput">Descricao</label>
-                </div>
-              </div>
-              <div className="col">
-                <div className="form-floating">
-                  <select value={vaga.senioridade}
-                    className="form-control"
-                    name="senioridade"
-                    id="floatingsenioridade"
-                    value={vaga.senioridade}
-                    onChange={handleFieldsChange}
-                    >
-                    <option value="junior">Junior</option>
-                    <option value="pleno">pleno</option>
-                    <option value="senior">senior</option>
-                  </select>
-                  <label htmlFor="floatingsenioridade">Senioridade</label>
+                  <label htmlFor="floatingsalario">URL da Imagem</label>
                 </div>
               </div>
             </div>

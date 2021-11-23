@@ -7,7 +7,7 @@ import { Modal } from 'react-responsive-modal';
 
 const VagaView = (props) => {
   const _id = props.match.params.id;
-  const [vaga, setVaga] = useState({});
+  const [perso, setPerso] = useState({});
   const [open, setOpen] = useState(false);
 
   const onOpenModal = () => setOpen(true);
@@ -15,12 +15,12 @@ const VagaView = (props) => {
 
   useEffect(() => {
     getVagaById();
-  }, []);
+  },[]);
 
   const getVagaById = async () => {
     const response = await Api.fetchGetById(_id);
     const result = await response.json();
-    setVaga(result);
+    setPerso(result);
   }
 
   const handleDelete = async (evento) => {
@@ -36,12 +36,10 @@ const VagaView = (props) => {
     <div className="container flex-grow-1">
       <div className="row">
         <div className="col">
-          <h1 className="text-center mt-4">{vaga.titulo}</h1>
-          <h2 className="text-center">{vaga.descricao}</h2>
-          <h4 className="text-center">{vaga.salario}</h4>
-          <h5 className="text-center">{vaga.senioridade}</h5>
+          <h1 className="text-center mt-4">{perso.nome}</h1>
+          <img src={perso.imagemUrl} alt={perso.nome}/>
           <div className="btn-group mt-3 w-100 d-flex align-items-center justify-content-center">
-            <Link to={`/update/${vaga._id}`}  className="btn btn-outline-info">Editar</Link>
+            <Link to={`/edit/${perso._id}`}  className="btn btn-outline-info">Editar</Link>
             <button className="btn btn-outline-danger" onClick={onOpenModal}>Excluir</button>
           </div>
         </div>

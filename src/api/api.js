@@ -1,23 +1,23 @@
 const Api = {
-  apiUrl: 'http://localhost:3001/vagas',
-  fetchGetAll: () => fetch(Api.apiUrl),
-  fetchGetById: id => fetch(`${Api.apiUrl}/${id}`),
-  fetchPost: (vaga) => {
-    return fetch(`${Api.apiUrl}/add`, {
+  apiUrl: 'http://localhost:3001/personagens',
+  fetchGetAll: () => fetch(`${Api.apiUrl}/readAll`),
+  fetchGetById: id => fetch(`${Api.apiUrl}/readSingle/${id}`),
+  fetchPost: (perso) => {
+    return fetch(`${Api.apiUrl}/create`, {
       method: 'POST',
       headers: new Headers({
         "Content-Type": "application/json",
       }),
-      body: JSON.stringify(vaga)
+      body: JSON.stringify(perso)
     })
   },
-  fetchPut: (vaga, id) => {
+  fetchPut: (perso, id) => {
     return fetch(`${Api.apiUrl}/update/${id}`, {
       method: 'PUT',
       headers: new Headers({
         "Content-Type": "application/json",
       }),
-      body: JSON.stringify(vaga)
+      body: JSON.stringify(perso)
     })
   },
   fetchDelete: (id) => {
